@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+venv/
+.venv/
+.env
+certificados_generados/
+base_certificados.xlsx
+certificados.db
+~$*

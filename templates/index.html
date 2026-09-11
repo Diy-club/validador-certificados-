@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        DIYCLUB | Validador de Certificados
+    </title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 10% 20%,
+                    rgba(255,255,255,0.7) 0 4px,
+                    transparent 5px
+                ),
+
+                radial-gradient(
+                    circle at 85% 15%,
+                    rgba(255,255,255,0.6) 0 5px,
+                    transparent 6px
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #ffd6e7,
+                    #f8b8d2,
+                    #e9a8c8
+                );
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 30px 15px;
+
+            overflow-x: hidden;
+        }
+
+
+        /* ====================================================
+           DECORACIONES
+           ==================================================== */
+
+        .decoracion {
+
+            position: fixed;
+
+            font-size: 42px;
+
+            opacity: 0.45;
+
+            pointer-events: none;
+
+            animation:
+                flotar 4s ease-in-out infinite;
+
+            z-index: 0;
+        }
+
+
+        /* Hilo */
+
+        .hilo {
+
+            top: 10%;
+
+            left: 18%;
+
+            animation-delay: 0s;
+        }
+
+
+        /* Maniquí */
+
+        .maniqui {
+
+            bottom: 10%;
+
+            right: 6%;
+
+            animation-delay: 1s;
+        }
+
+
+        /* Tijeras */
+
+        .tijeras {
+
+            top: 20%;
+
+            right: 9%;
+
+            font-size: 38px;
+
+            animation-delay: 2s;
+        }
+
+
+        /* Aguja */
+
+        .aguja {
+
+            bottom: 18%;
+
+            left: 7%;
+
+            font-size: 35px;
+
+            animation-delay: 1.5s;
+        }
+
+
+        /* Corazón */
+
+        .corazon-deco {
+
+            top: 12%;
+
+            right: 23%;
+
+            font-size: 28px;
+
+            animation-delay: 2.5s;
+        }
+
+
+        /* ====================================================
+           ANIMACIÓN
+           ==================================================== */
+
+        @keyframes flotar {
+
+            0%, 100% {
+
+                transform:
+                    translateY(0)
+                    rotate(-5deg);
+            }
+
+            50% {
+
+                transform:
+                    translateY(-15px)
+                    rotate(5deg);
+            }
+
+        }
+
+
+        /* ====================================================
+           CONTENEDOR PRINCIPAL
+           ==================================================== */
+
+        .contenedor {
+
+            position: relative;
+
+            z-index: 1;
+
+            width: 100%;
+
+            max-width: 650px;
+
+            background:
+                rgba(255,255,255,0.90);
+
+            backdrop-filter:
+                blur(12px);
+
+            -webkit-backdrop-filter:
+                blur(12px);
+
+            border-radius: 30px;
+
+            padding: 45px 35px;
+
+            box-shadow:
+                0 20px 60px
+                rgba(153,64,104,0.25);
+
+            text-align: center;
+
+            animation:
+                aparecer 0.8s ease;
+        }
+
+
+        /* ====================================================
+           ANIMACIÓN ENTRADA
+           ==================================================== */
+
+        @keyframes aparecer {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(25px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        /* ====================================================
+           LOGO - IMAGEN PNG
+           ==================================================== */
+
+        .logo {
+
+            display: inline-block;
+
+            width: 300px;
+
+            max-width: 80%;
+
+            height: auto;
+
+            margin-bottom: 8px;
+        }
+
+
+        /* ====================================================
+           SUBTÍTULO
+           ==================================================== */
+
+        .subtitulo {
+
+            color: #7b5266;
+
+            font-size: 15px;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* ====================================================
+           LÍNEA
+           ==================================================== */
+
+        .linea {
+
+            width: 70px;
+
+            height: 4px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #e67eaa,
+                    #c54880
+                );
+
+            border-radius: 20px;
+
+            margin:
+                0 auto 30px;
+        }
+
+
+        /* ====================================================
+           TÍTULO
+           ==================================================== */
+
+        h2 {
+
+            color: #5f394b;
+
+            font-size: 25px;
+
+            margin-bottom: 10px;
+        }
+
+
+        /* ====================================================
+           DESCRIPCIÓN
+           ==================================================== */
+
+        .descripcion {
+
+            color: #8a6878;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* ====================================================
+           FORMULARIO
+           ==================================================== */
+
+        form {
+
+            width: 100%;
+        }
+
+
+        .campo {
+
+            position: relative;
+
+            margin-bottom: 15px;
+        }
+
+
+        .icono {
+
+            position: absolute;
+
+            left: 17px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            font-size: 20px;
+        }
+
+
+        /* ====================================================
+           INPUT
+           ==================================================== */
+
+        input {
+
+            width: 100%;
+
+            padding:
+                16px
+                18px
+                16px
+                50px;
+
+            border:
+                2px solid #f0c5d7;
+
+            border-radius: 15px;
+
+            background: #fffafd;
+
+            font-size: 16px;
+
+            color: #573545;
+
+            outline: none;
+
+            transition: 0.3s;
+        }
+
+
+        input:focus {
+
+            border-color: #d85c91;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(216,92,145,0.12);
+        }
+
+
+        input::placeholder {
+
+            color: #b99aa9;
+        }
+
+
+        /* ====================================================
+           BOTÓN BUSCAR
+           ==================================================== */
+
+        .boton {
+
+            width: 100%;
+
+            padding: 16px;
+
+            border: none;
+
+            border-radius: 15px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #d85c91,
+                    #b83e72
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 20px
+                rgba(184,62,114,0.25);
+
+            transition: 0.3s;
+        }
+
+
+        .boton:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 12px 25px
+                rgba(184,62,114,0.35);
+        }
+
+
+        /* ====================================================
+           ERROR
+           ==================================================== */
+
+        .error {
+
+            margin-top: 20px;
+
+            padding: 14px;
+
+            background: #fff0f4;
+
+            border:
+                1px solid #f3b8ca;
+
+            border-radius: 12px;
+
+            color: #b83e62;
+
+            font-weight: 600;
+        }
+
+
+        /* ====================================================
+           RESULTADOS
+           ==================================================== */
+
+        .resultados-titulo {
+
+            margin-top: 30px;
+
+            margin-bottom: 15px;
+
+            color: #c54880;
+
+            font-size: 22px;
+
+            font-weight: 800;
+        }
+
+
+        .cantidad {
+
+            color: #8a6878;
+
+            font-size: 14px;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* ====================================================
+           TARJETA CERTIFICADO
+           ==================================================== */
+
+        .certificado {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #ffffff,
+                    #fff5f9
+                );
+
+            border:
+                1px solid #f0c7d8;
+
+            border-radius: 22px;
+
+            padding: 25px;
+
+            margin-bottom: 20px;
+
+            text-align: left;
+
+            box-shadow:
+                0 10px 30px
+                rgba(165,73,111,0.12);
+
+            animation:
+                aparecerCertificado 0.6s ease;
+
+            transition:
+                transform 0.3s,
+                box-shadow 0.3s;
+        }
+
+
+        .certificado:hover {
+
+            transform:
+                translateY(-4px);
+
+            box-shadow:
+                0 15px 35px
+                rgba(165,73,111,0.18);
+        }
+
+
+        /* ====================================================
+           ANIMACIÓN TARJETA
+           ==================================================== */
+
+        @keyframes aparecerCertificado {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(15px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        /* ====================================================
+           NÚMERO DE CERTIFICADO
+           ==================================================== */
+
+        .numero-curso {
+
+            display: inline-block;
+
+            background: #f8d0df;
+
+            color: #b83e72;
+
+            padding:
+                6px 12px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* ====================================================
+           CURSO
+           ==================================================== */
+
+        .titulo-curso {
+
+            color: #c54880;
+
+            font-size: 19px;
+
+            font-weight: 800;
+
+            margin-bottom: 18px;
+
+            line-height: 1.4;
+        }
+
+
+        /* ====================================================
+           DATOS
+           ==================================================== */
+
+        .dato {
+
+            padding: 11px 0;
+
+            border-bottom:
+                1px solid #f3dce6;
+
+            color: #694858;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+
+        .dato:last-of-type {
+
+            border-bottom: none;
+        }
+
+
+        .dato strong {
+
+            color: #7c3d59;
+        }
+
+
+        /* ====================================================
+           BOTÓN PDF
+           ==================================================== */
+
+        .boton-pdf {
+
+            display: block;
+
+            width: 100%;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            margin-top: 20px;
+
+            padding: 15px;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #d85c91,
+                    #b83e72
+                );
+
+            color: white !important;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            box-shadow:
+                0 8px 18px
+                rgba(184,62,114,0.25);
+
+            transition:
+                all 0.3s ease;
+        }
+
+
+        .boton-pdf:hover {
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 12px 25px
+                rgba(184,62,114,0.35);
+        }
+
+
+        /* ====================================================
+           PIE DE PÁGINA
+           ==================================================== */
+
+        .pie {
+
+            margin-top: 30px;
+
+            color: #9c7788;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+
+        .corazon {
+
+            color: #d85c91;
+        }
+
+
+        /* ====================================================
+           MÓVIL
+           ==================================================== */
+
+        @media (max-width: 500px) {
+
+            body {
+
+                padding:
+                    20px 12px;
+            }
+
+
+            .contenedor {
+
+                padding:
+                    35px 20px;
+
+                border-radius:
+                    25px;
+            }
+
+
+            .logo {
+
+                width: 220px;
+
+                max-width: 75%;
+
+            }
+
+
+            h2 {
+
+                font-size:
+                    22px;
+            }
+
+
+            .decoracion {
+
+                display:
+                    none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ======================================================
+         DECORACIONES
+         ====================================================== -->
+
+    <div class="decoracion hilo">
+        🧵
+    </div>
+
+
+    <div class="decoracion maniqui">
+        🧍🏻‍♀️
+    </div>
+
+
+    <div class="decoracion tijeras">
+        ✂️
+    </div>
+
+
+    <div class="decoracion aguja">
+        🪡
+    </div>
+
+
+    <div class="decoracion corazon-deco">
+        💗
+    </div>
+
+
+    <!-- ======================================================
+         CONTENEDOR
+         ====================================================== -->
+
+    <main class="contenedor">
+
+
+        <!-- ==================================================
+             LOGO DE DIYCLUB
+             ================================================== -->
+
+        <img
+            src="{{ url_for('static', filename='logo_diyclub.png') }}"
+            alt="DIYCLUB"
+            class="logo"
+        >
+
+
+        <p class="subtitulo">
+            Creando, aprendiendo y creciendo juntas ✨
+        </p>
+
+
+        <div class="linea"></div>
+
+
+        <!-- ==================================================
+             TÍTULO
+             ================================================== -->
+
+        <h2>
+            🔍 Validador de Certificados
+        </h2>
+
+
+        <p class="descripcion">
+
+            Ingresa tu número de cédula para consultar
+            todos tus certificados y cursos.
+
+        </p>
+
+
+        <!-- ==================================================
+             FORMULARIO
+             ================================================== -->
+
+        <form method="POST">
+
+            <div class="campo">
+
+                <span class="icono">
+                    🧵
+                </span>
+
+
+                <input
+                    type="text"
+                    name="cedula"
+                    placeholder="Ingresa tu número de cédula"
+                    value="{{ cedula_buscada }}"
+                    autocomplete="off"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="boton"
+            >
+
+                🔎 Buscar mis certificados
+
+            </button>
+
+        </form>
+
+
+        <!-- ==================================================
+             MENSAJE DE ERROR
+             ================================================== -->
+
+        {% if mensaje %}
+
+            <div class="error">
+
+                ❌ {{ mensaje }}
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- ==================================================
+             RESULTADOS
+             ================================================== -->
+
+        {% if certificados %}
+
+
+            <div class="resultados-titulo">
+
+                🎉 ¡Certificados encontrados!
+
+            </div>
+
+
+            <div class="cantidad">
+
+                Esta persona tiene
+
+                <strong>
+                    {{ certificados|length }}
+                </strong>
+
+                certificado(s) registrado(s).
+
+            </div>
+
+
+            <!-- ==============================================
+                 RECORRER CERTIFICADOS
+                 ============================================== -->
+
+            {% for certificado in certificados %}
+
+
+                <div class="certificado">
+
+
+                    <!-- ======================================
+                         NÚMERO
+                         ====================================== -->
+
+                    <div class="numero-curso">
+
+                        🧵 CERTIFICADO {{ loop.index }}
+
+                    </div>
+
+
+                    <!-- ======================================
+                         CURSO
+                         ====================================== -->
+
+                    <div class="titulo-curso">
+
+                        🎓 {{ certificado[1] }}
+
+                    </div>
+
+
+                    <!-- ======================================
+                         NOMBRE
+                         ====================================== -->
+
+                    <div class="dato">
+
+                        <strong>
+                            👤 Nombre:
+                        </strong>
+
+                        {{ certificado[0] }}
+
+                    </div>
+
+
+                    <!-- ======================================
+                         CÉDULA
+                         ====================================== -->
+
+                    <div class="dato">
+
+                        <strong>
+                            🪪 Cédula:
+                        </strong>
+
+                        {{ cedula_buscada }}
+
+                    </div>
+
+
+                    <!-- ======================================
+                         FECHA DE CERTIFICACIÓN
+                         ====================================== -->
+
+                    <div class="dato">
+
+                        <strong>
+                            📅 Fecha de certificación:
+                        </strong>
+
+                        {{ certificado[5] }}
+
+                    </div>
+
+
+                    <!-- ======================================
+                         CÓDIGO
+                         ====================================== -->
+
+                    <div class="dato">
+
+                        <strong>
+                            🔐 Código:
+                        </strong>
+
+                        {{ certificado[6] }}
+
+                    </div>
+
+
+                    <!-- ======================================
+                         BOTÓN PDF
+                         ====================================== -->
+
+                    <a
+                        href="/descargar/{{ certificado[6] }}"
+                        class="boton-pdf"
+                    >
+
+                        📄 Descargar PDF
+
+                    </a>
+
+
+                </div>
+
+
+            {% endfor %}
+
+
+        {% endif %}
+
+
+        <!-- ==================================================
+             PIE
+             ================================================== -->
+
+        <div class="pie">
+
+            DIYCLUB · Validador de Certificados
+
+            <br>
+
+            Hecho con
+
+            <span class="corazon">
+                ♥️
+            </span>
+
+        </div>
+
+
+    </main>
+
+
+</body>
+
+</html>
